@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProyectoDos.UI.Models.Factura>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Facturas</h1>
+
+<p>
+    <a asp-action="Create">Crear Facturas</a>
+</p>
+<form asp-controller="Factura" asp-action="Index" method="Post">
+    <p>
+        Buscar factura por idFactura <input type="text" name="searchString" />
+        <input type="submit" value="Buscar" />
+    </p>
+    @if (ViewData["valor"] == "x")
+    {
+        <a asp-action="Index">Mostrar todas las facturas</a>
+    }
+    else
+    {
+        <div>
+            @ViewBag.resultado
+        </div>
+    }
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdFactura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClienteIdentificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precioSinIva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precioConIva)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdFactura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteIdentificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precioSinIva)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precioConIva)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new {  id= item.IdFactura }) |
+                    @Html.ActionLink("Ver detalle de factura", "Details", new {  id= item.IdFactura }) |
+                    @Html.ActionLink("Eliminar", "Delete", new {  id= item.IdFactura })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

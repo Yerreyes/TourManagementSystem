@@ -1,0 +1,51 @@
+﻿@model ProyectoUno.Models.Tours
+
+@{
+    ViewData["Title"] = "Eliminar Tour";
+}
+
+<h1>Eliminar<h1>
+
+<h3>Esta seguro que desea eliminar el tour?</h3>
+<div>
+    <h4>Tour</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dias)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dias)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDProveedor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDProveedor)
+        </dd>
+
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>

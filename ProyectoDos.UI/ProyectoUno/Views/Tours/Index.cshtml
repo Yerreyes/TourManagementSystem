@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProyectoUno.Models.Tours>
+
+@{
+    ViewData["Title"] = "Lista Tours";
+}
+
+<h3>Tours</h3>
+
+<p>
+    <a asp-action="Create">Crear nuevo Tour</a>
+</p>
+<form asp-controller="Tours" asp-action="Index" method="Post">
+    <p>
+        Buscar cliente por cedula <input type="text" name="idBuscar" />
+        <input type="submit" value="Buscar" />
+    </p>
+    @if (ViewData["Nombre"] == "x")
+    {
+        <a asp-action="Index">Mostrar todos los Tours</a>
+    }
+    else
+    {
+        <div>
+            @ViewBag.resultado
+        </div>
+    }
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDProveedor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                   @item.Id
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDProveedor)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id=item.Id}) |
+                    @Html.ActionLink("Información", "Details", new {  id=item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

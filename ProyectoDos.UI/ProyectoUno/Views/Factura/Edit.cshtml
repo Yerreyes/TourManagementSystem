@@ -1,0 +1,141 @@
+﻿@model ProyectoDos.UI.Models.Factura
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar factura</h1>
+
+<h4>Factura</h4>
+<hr />
+<div class="row">
+   
+        <form asp-action="editar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label asp-for="IdFactura" class="control-label"></label>
+                    <input asp-for="IdFactura" name="IdFactura" class="form-control" />
+                    <span asp-validation-for="IdFactura" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Fecha" class="control-label"></label>
+                    <input asp-for="Fecha" class="form-control" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <table id="tablaC" class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+
+                            <th>
+                                <button id="btnAddC" type="button" class="btn btn-dark btn-sm visible"
+                                        onclick="AddCursos(this)">
+                                    Agregar
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.Tours.Count(); i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="hidden" asp-for="@Model.Tours[i].EsEliminado">
+                                    <select asp-for="@Model.Tours[i].Id" class="form-select" asp-items="@(ViewBag.listaTours)"></select>
+                                </td>
+                                <td>
+                                    <button id="btnremoveC-@i" type="button" class="btn btn-danger btn-sm visible"
+                                        onclick="DeleteItem(this)">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-10">
+                <table id="tablaD" class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+
+                            <th>
+                                <button id="btnAddD" type="button" class="btn btn-dark btn-sm visible"
+                                        onclick="AddCursos1(this)">
+                                    Agregar
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.Productos.Count(); i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <input type="hidden" asp-for="@Model.Productos[i].EsEliminado">
+                                    <select asp-for="@Model.Productos[i].id" class="form-select" asp-items="@(ViewBag.listaProductos)"></select>
+                                </td>
+                                <td>
+                                    <button id="btnremoveD-@i" type="button" class="btn btn-danger btn-sm visible"
+                                        onclick="DeleteItem1(this)">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            !!Antes de guardar los cambios debe actualizar la factura
+            <div class="form-group mt-2">
+                <input type="submit" value="Actualizar" class="btn btn-success" />
+            </div>
+
+
+        <dt class="col-sm-3">
+            Precio sin Iva
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.precioSinIva)
+        </dd>
+        <dt class="col-sm-3">
+            Precio Con Iva
+        </dt>
+        <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.precioConIva)
+        </dd>
+        </form>
+</div>
+
+
+<div>
+
+    <div>
+        !!Presione para actualizar la factura!!
+        <a type="button" class="btn btn-primary" href="@Url.Action("editar2", "Factura",  new { id = Model.IdFactura})"> Guardar los cambios </a>
+    </div>
+
+
+</div>
+
+<div>
+    <a asp-action="Index">Regresar </a>
+</div>
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js"></script>
+
+

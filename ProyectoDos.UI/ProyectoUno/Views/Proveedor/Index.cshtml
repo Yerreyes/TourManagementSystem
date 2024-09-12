@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProyectoUno.Models.Proveedor>
+
+@{
+    ViewData["Title"] = "Lista de proveedores";
+}
+
+<h1>Lista de Proveedores</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo proveedor</a>
+</p>
+<form asp-controller="Proveedor" asp-action="Index" method="Post">
+    <p>
+        Buscar cliente por cedula <input type="text" name="idBuscar" />
+        <input type="submit" value="Buscar" />
+    </p>
+    @if (ViewData["Nombre"] == "x")
+    {
+        <a asp-action="Index">Mostrar todos los proveedores</a>
+    }
+    else
+    {
+        <div>
+            @ViewBag.resultado
+        </div>
+    }
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdProveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                    @Html.ActionLink("Actualizar", "Edit", new { id=item.IdProveedor}) |
+                    @Html.ActionLink("Detalles", "Details", new { id=item.IdProveedor}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.IdProveedor })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

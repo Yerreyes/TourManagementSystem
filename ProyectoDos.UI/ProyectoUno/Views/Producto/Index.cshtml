@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ProyectoUno.Models.Producto>
+
+@{
+    ViewData["Title"] = "Lista productos";
+}
+
+<h2>Lista de productos</h2>
+
+<p>
+    <a asp-action="Create">Crear producto</a>
+</p>
+<form asp-controller="Producto" asp-action="Index" method="Post">
+    <p>
+        Buscar cliente por cedula <input type="text" name="idBuscar" />
+        <input type="submit" value="Buscar" />
+    </p>
+    @if (ViewData["Nombre"] == "x")
+    {
+        <a asp-action="Index">Mostrar todos los productos</a>
+    }else{
+        <div>
+            @ViewBag.resultado
+        </div>
+    }
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                Año de ingreso
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.utilidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDProveedor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.annoIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.utilidad)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDProveedor)
+                </td>
+            <td>
+                @Html.ActionLink("Actualizar", "Edit", new {  id=item.id }) |
+                @Html.ActionLink("Detalles", "Details", new {  id=item.id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

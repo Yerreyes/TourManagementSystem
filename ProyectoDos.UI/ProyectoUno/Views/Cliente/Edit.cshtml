@@ -1,0 +1,77 @@
+﻿@model ProyectoUno.Models.Cliente
+
+@{
+    ViewData["Title"] = "Actualizar Cliente";
+}
+
+<h3>Actualizar</h3>
+
+<h5>Cliente</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cedula" class="control-label"></label>
+                <input asp-for="Cedula" name="Cedula" class="form-control" disabled />
+                <span asp-validation-for="Cedula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Año de nacimiento
+                <input asp-for="FechaNacimiento" class="form-control" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profesion" class="control-label"></label>
+                <input asp-for="Profesion" class="form-control" />
+                <span asp-validation-for="Profesion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Dónde se enteró de la página?
+                <select asp-for="@Model.Entero" class="form-select" asp-items="ViewBag.LaLista"></select>
+            </div>
+            <div class="form-group">
+                 Contraseña
+                <input asp-for="Contrasenna" class="form-control" />
+                <span asp-validation-for="Contrasenna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (User.IsInRole("administrador"))
+{
+      <div>
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+}else
+{
+    <div>
+        @Html.ActionLink("Regresar", "Details", new {  id = Model.Cedula })
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

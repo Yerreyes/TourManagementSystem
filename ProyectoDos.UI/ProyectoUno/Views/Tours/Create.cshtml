@@ -1,0 +1,54 @@
+﻿@model ProyectoUno.Models.Tours
+
+@{
+    ViewData["Title"] = "Registro Tours";
+}
+
+<h1>Registro</h1>
+
+<h4>Tours</h4>
+<hr />
+
+@using (Html.BeginForm("Create", "Tours", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Días que se ofrece el servicio
+                <select asp-for="@Model.dias" class="form-select" asp-items="ViewBag.listaDias"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Identificador del proveedor
+                <select asp-for="@Model.IDProveedor" class="form-select" asp-items="ViewBag.listaProveedores"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </div>
+
+}
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
